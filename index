@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hectorpiks</title>
+<meta name="description" content="Productos seleccionados por Hectorpiks. Disponibles en Mercado Libre.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg2: #f8f7f5;
+    --border: #e8e5e0;
+    --text: #1a1a1a;
+    --muted: #9a9590;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-weight: 300; }
+
+/* TOPBAR */
+.topbar {
+background: var(–bg2);
+border-bottom: 1px solid var(–border);
+display: flex; align-items: center; justify-content: center;
+gap: 32px; height: 34px;
+}
+.topbar a {
+font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase;
+color: var(–muted); text-decoration: none; transition: color 0.15s;
+}
+.topbar a:hover { color: var(–text); }
+
+/* HEADER */
+header {
+position: sticky; top: 0; z-index: 50;
+background: rgba(255,255,255,0.97);
+backdrop-filter: blur(12px);
+border-bottom: 1px solid var(–border);
+}
+.header-inner {
+display: flex; align-items: center; justify-content: space-between;
+padding: 0 32px; height: 54px;
+}
+.logo {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1.35rem; font-weight: 600;
+letter-spacing: 0.14em; text-transform: uppercase; color: var(–text);
+flex-shrink: 0;
+}
+
+/* TABS */
+.tabs {
+display: flex;
+gap: 4px;
+background: var(–bg2);
+border-radius: 6px;
+padding: 4px;
+}
+.tab {
+padding: 6px 20px;
+border: none; background: transparent;
+font-family: ‘Inter’, sans-serif;
+font-size: 0.7rem; font-weight: 500;
+letter-spacing: 0.1em; text-transform: uppercase;
+color: var(–muted); cursor: pointer;
+border-radius: 4px;
+transition: all 0.18s;
+}
+.tab.active { background: var(–text); color: #fff; }
+.tab:hover:not(.active) { color: var(–text); }
+
+/* GRID */
+.grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 1px;
+background: var(–border);
+border-top: 1px solid var(–border);
+}
+
+/* CARD */
+.card { background: var(–bg); display: flex; flex-direction: column; transition: background 0.18s; }
+.card:hover { background: var(–bg2); }
+
+.card-visual {
+width: 100%; aspect-ratio: 1;
+background: var(–bg2);
+display: flex; align-items: center; justify-content: center;
+font-size: 3.5rem;
+}
+.card-body { padding: 14px 18px 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.card-tag { font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(–muted); }
+.card-name { font-family: ‘Inter’, sans-serif; font-size: 0.88rem; font-weight: 500; line-height: 1.35; }
+.card-note { font-size: 0.72rem; color: var(–muted); line-height: 1.6; }
+.card-footer {
+margin-top: auto; padding-top: 12px;
+border-top: 1px solid var(–border);
+display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+.card-price { font-family: ‘Cormorant Garamond’, serif; font-size: 1.15rem; font-weight: 600; }
+.card-price-from { font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(–muted); display: block; margin-bottom: 1px; }
+
+.btn-comprar {
+display: inline-block;
+background: var(–text); color: #fff;
+font-family: ‘Inter’, sans-serif;
+font-size: 0.65rem; font-weight: 500;
+letter-spacing: 0.1em; text-transform: uppercase;
+text-decoration: none;
+padding: 8px 16px; border-radius: 4px;
+white-space: nowrap;
+transition: opacity 0.15s, transform 0.1s;
+flex-shrink: 0;
+}
+.btn-comprar:hover { opacity: 0.75; transform: translateY(-1px); }
+
+/* SECTIONS */
+.section { display: none; }
+.section.active { display: block; }
+
+/* FOOTER */
+footer {
+border-top: 1px solid var(–border);
+padding: 24px 32px;
+display: flex; align-items: center; justify-content: space-between;
+background: var(–bg2);
+}
+.f-logo { font-family: ‘Cormorant Garamond’, serif; font-size: 1.05rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+.f-links { display: flex; gap: 24px; }
+.f-links a { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(–muted); text-decoration: none; transition: color 0.15s; }
+.f-links a:hover { color: var(–text); }
+.f-note { font-size: 0.6rem; color: var(–muted); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 600px) {
+.topbar { gap: 20px; }
+.header-inner { padding: 0 16px; }
+.tabs { gap: 2px; padding: 3px; }
+.tab { padding: 5px 12px; font-size: 0.65rem; }
+.grid { grid-template-columns: repeat(2, 1fr); }
+.card-visual { font-size: 2.5rem; }
+footer { flex-direction: column; gap: 16px; text-align: center; }
+.f-links { justify-content: center; }
+.f-note { display: none; }
+}
+</style>
+
+</head>
+<body>
+
+<div class="topbar">
+  <a href="https://www.tiktok.com/@hectorpiks" target="_blank">TikTok</a>
+  <a href="https://www.instagram.com/hectorpiks" target="_blank">Instagram</a>
+  <a href="https://www.facebook.com/hectorpiks" target="_blank">Facebook</a>
+</div>
+
+<header>
+  <div class="header-inner">
+    <span class="logo">Hectorpiks</span>
+    <div class="tabs">
+      <button class="tab active" onclick="show('gadgets',this)">Gadgets</button>
+      <button class="tab" onclick="show('salud',this)">Salud</button>
+      <button class="tab" onclick="show('belleza',this)">Belleza</button>
+    </div>
+  </div>
+</header>
+
+<!-- GADGETS -->
+
+<div class="section active" id="gadgets"><div class="grid">
+  <div class="card"><div class="card-visual">🎧</div><div class="card-body"><span class="card-tag">Audio</span><h3 class="card-name">Audífonos con Cancelación de Ruido</h3><p class="card-note">30 hrs de batería. Ideal para concentrarte o simplemente desaparecer.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=audifonos+anc+inalambricos" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">⌚</div><div class="card-body"><span class="card-tag">Wearables</span><h3 class="card-name">Smartwatch GPS + ECG</h3><p class="card-note">Monitorea tu corazón, sueño y actividad. Todo en la muñeca.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=smartwatch+gps+ecg" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">🚁</div><div class="card-body"><span class="card-tag">Fotografía</span><h3 class="card-name">Mini Drone con Cámara HD</h3><p class="card-note">El punto de vista que no puedes lograr desde el suelo.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=mini+drone+camara+hd+plegable" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">📷</div><div class="card-body"><span class="card-tag">Fotografía</span><h3 class="card-name">Cámara de Acción 4K</h3><p class="card-note">Resistente al agua. Para viajes, deporte, o documentar lo que sea.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=camara+accion+4k+waterproof" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">🕶️</div><div class="card-body"><span class="card-tag">Tecnología</span><h3 class="card-name">Lentes de Realidad Aumentada</h3><p class="card-note">Lo que creías que era ciencia ficción ya llegó a ML.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=lentes+ar+smart+glasses" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">🖥️</div><div class="card-body"><span class="card-tag">Productividad</span><h3 class="card-name">Monitor Portátil 15.6" USB-C</h3><p class="card-note">Segunda pantalla en cualquier lugar. Conecta y listo.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=monitor+portatil+usb+c+15" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual" style="padding:0;overflow:hidden;"><img src="https://http2.mlstatic.com/D_NQ_NP_2X_980564-MLA99977252035_112025-F.webp" alt="Power Bank Anker 25000mAh" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="card-body"><span class="card-tag">Accesorios · Anker</span><h3 class="card-name">Power Bank Anker 25,000mAh 100W</h3><p class="card-note">3 puertos USB-C, cables retráctiles, pantalla smart. Compatible con iPhone, Samsung, MacBook y más.</p><div class="card-footer"><a href="https://meli.la/2pEA5KZ" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">🔌</div><div class="card-body"><span class="card-tag">Accesorios</span><h3 class="card-name">Cargador GaN 100W 4 Puertos</h3><p class="card-note">Un solo cargador para todo. Del tamaño de una cajetilla.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=cargador+gan+100w+4+puertos+usbc" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">🔊</div><div class="card-body"><span class="card-tag">Audio</span><h3 class="card-name">Bocina Bluetooth Resistente al Agua</h3><p class="card-note">Para la regadera, la playa, o donde sea que te dé la gana.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=bocina+bluetooth+waterproof+portatil" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">💡</div><div class="card-body"><span class="card-tag">Hogar</span><h3 class="card-name">Foco LED Inteligente RGB</h3><p class="card-note">Cambia el ambiente de cualquier cuarto desde el teléfono.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=foco+inteligente+rgb+wifi+alexa" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">🖱️</div><div class="card-body"><span class="card-tag">Productividad</span><h3 class="card-name">Mouse Ergonómico Vertical</h3><p class="card-note">La muñeca te lo va a agradecer. Especialmente en días de 8+ horas.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=mouse+vertical+ergonomico+inalambrico" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">🎮</div><div class="card-body"><span class="card-tag">Gaming</span><h3 class="card-name">Controlador Inalámbrico Universal</h3><p class="card-note">PC, Android, iOS. Latencia baja, cómodo de verdad.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=control+inalambrico+pc+android" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+</div></div>
+
+<!-- SALUD -->
+
+<div class="section" id="salud"><div class="grid">
+  <div class="card"><div class="card-visual">🩺</div><div class="card-body"><span class="card-tag">Monitoreo</span><h3 class="card-name">Oxímetro de Pulso Digital</h3><p class="card-note">Resultado en segundos. Debería estar en todas las casas.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=oximetro+pulso+digital" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">🌡️</div><div class="card-body"><span class="card-tag">Monitoreo</span><h3 class="card-name">Tensiómetro Digital de Brazo</h3><p class="card-note">Memoria para dos usuarios, detección de arritmias básica.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=tensiómetro+digital+brazo" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">⚖️</div><div class="card-body"><span class="card-tag">Monitoreo</span><h3 class="card-name">Báscula Inteligente Grasa Corporal</h3><p class="card-note">No solo pesa — mide músculo, grasa e hidratación.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=bascula+inteligente+grasa+corporal+wifi" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">💊</div><div class="card-body"><span class="card-tag">Suplementos</span><h3 class="card-name">Magnesio Glicinato 400mg</h3><p class="card-note">La forma más absorbible. Sueño, músculo y sistema nervioso.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=magnesio+glicinato+400mg" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">☀️</div><div class="card-body"><span class="card-tag">Suplementos</span><h3 class="card-name">Vitamina D3 + K2 5,000 UI</h3><p class="card-note">La deficiencia más común que veo en consulta. Esta combinación funciona.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=vitamina+d3+k2+5000ui" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">🦴</div><div class="card-body"><span class="card-tag">Suplementos</span><h3 class="card-name">Colágeno Hidrolizado + Vitamina C</h3><p class="card-note">Para articulaciones, piel y recuperación. Polvo sin sabor.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=colageno+hidrolizado+vitamina+c" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">🧘</div><div class="card-body"><span class="card-tag">Recuperación</span><h3 class="card-name">Pistola de Masaje Percusivo</h3><p class="card-note">Para contracturas, post-ejercicio, o porque el trabajo pesa.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=pistola+masaje+percusivo" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">😴</div><div class="card-body"><span class="card-tag">Sueño</span><h3 class="card-name">Antifaz con Bluetooth y Sonidos</h3><p class="card-note">Oscuridad total + altavoces integrados. Para dormir de verdad.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=antifaz+bluetooth+sonidos+dormir" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">🧬</div><div class="card-body"><span class="card-tag">Suplementos</span><h3 class="card-name">Omega-3 EPA/DHA 1,000mg</h3><p class="card-note">Corazón, cerebro, inflamación. De los más respaldados por evidencia.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=omega+3+epa+dha+1000mg" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">🫁</div><div class="card-body"><span class="card-tag">Equipo</span><h3 class="card-name">Nebulizador Ultrasónico Portátil</h3><p class="card-note">Silencioso, compacto. Para alergias, asma o bronquitis recurrente.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=nebulizador+ultrasonico+portatil" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">🏃</div><div class="card-body"><span class="card-tag">Ejercicio</span><h3 class="card-name">Bandas de Resistencia Set x5</h3><p class="card-note">Gym completo en una bolsa. Sin excusas de espacio ni tiempo.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=bandas+resistencia+set+ejercicio" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">🧪</div><div class="card-body"><span class="card-tag">Suplementos</span><h3 class="card-name">Probiótico 50 Billones UFC</h3><p class="card-note">Microbioma, digestión, sistema inmune. Los tres en uno.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=probiotico+50+billones+ufc" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+</div></div>
+
+<!-- BELLEZA -->
+
+<div class="section" id="belleza"><div class="grid">
+  <div class="card"><div class="card-visual">✨</div><div class="card-body"><span class="card-tag">Skincare</span><h3 class="card-name">Sérum Vitamina C 20%</h3><p class="card-note">L-ascórbico puro. Manchas, luminosidad, antioxidante real.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=serum+vitamina+c+20+ascorbico" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">🧴</div><div class="card-body"><span class="card-tag">Skincare</span><h3 class="card-name">Sérum Ácido Hialurónico</h3><p class="card-note">Multi-peso molecular. Va antes de tu crema. Hidratación real.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=serum+acido+hialuronico+facial" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">🌿</div><div class="card-body"><span class="card-tag">Skincare</span><h3 class="card-name">Niacinamida + Zinc 10%</h3><p class="card-note">Poros, manchas, grasa. De los mejores ingredientes que existen.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=niacinamida+zinc+serum+poros" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">💆</div><div class="card-body"><span class="card-tag">Tratamientos</span><h3 class="card-name">Mascarilla LED Terapia Facial</h3><p class="card-note">Rojo para colágeno, azul antibacterial. Para entre sesiones.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=mascara+led+terapia+facial" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">🔬</div><div class="card-body"><span class="card-tag">Tratamientos</span><h3 class="card-name">Dermaroller Microneedling 0.5mm</h3><p class="card-note">Estimula colágeno en casa. Para usarlo con sérum.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=microneedling+roller+dermaroller" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">👁️</div><div class="card-body"><span class="card-tag">Skincare</span><h3 class="card-name">Contorno de Ojos con Retinol</h3><p class="card-note">La zona que más envejece y menos se cuida. Empieza aquí.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=contorno+ojos+retinol+antiedad" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">🪨</div><div class="card-body"><span class="card-tag">Herramientas</span><h3 class="card-name">Roller de Jade + Gua Sha</h3><p class="card-note">Drenaje linfático facial. 5 minutos al día, resultado visible.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=roller+jade+gua+sha+facial" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">🪥</div><div class="card-body"><span class="card-tag">Higiene</span><h3 class="card-name">Cepillo Eléctrico Sónico</h3><p class="card-note">Limpieza clínica en casa. La diferencia es notoria desde el primer uso.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=cepillo+dental+electrico+sonico" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">🌊</div><div class="card-body"><span class="card-tag">Higiene</span><h3 class="card-name">Irrigador Dental Water Flosser</h3><p class="card-note">Lo que el hilo dental no alcanza, esto sí.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=irrigador+dental+water+flosser" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">💇</div><div class="card-body"><span class="card-tag">Cabello</span><h3 class="card-name">Plancha de Pelo Iónica Profesional</h3><p class="card-note">Menos frizz, más brillo. La diferencia está en la tecnología iónica.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=plancha+pelo+ionica+profesional" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">🪞</div><div class="card-body"><span class="card-tag">Herramientas</span><h3 class="card-name">Espejo con Luz LED Ring</h3><p class="card-note">La iluminación correcta cambia todo. Para maquillaje o skincare.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=espejo+luz+led+ring+maquillaje" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+  <div class="card"><div class="card-visual">💅</div><div class="card-body"><span class="card-tag">Uñas</span><h3 class="card-name">Kit Nail Art Gel UV Completo</h3><p class="card-note">Salón en casa. Incluye lámpara, geles y todo lo necesario.</p><div class="card-footer"><a href="https://www.mercadolibre.com.mx/buscar?q=kit+nail+art+gel+uv+lampara" target="_blank" class="btn-comprar">Comprar</a></div></div></div>
+</div></div>
+
+<footer>
+  <span class="f-logo">Hectorpiks</span>
+  <div class="f-links">
+    <a href="https://www.tiktok.com/@hectorpiks" target="_blank">TikTok</a>
+    <a href="https://www.instagram.com/hectorpiks" target="_blank">Instagram</a>
+    <a href="https://www.facebook.com/hectorpiks" target="_blank">Facebook</a>
+  </div>
+  <span class="f-note">Productos vía Mercado Libre</span>
+</footer>
+
+<script>
+  function show(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
